@@ -1,0 +1,27 @@
+# Quartus build & temporary files
+**/db/
+**/incremental_db/
+**/output_files/
+**/simulation/
+**/greybox_tmp/
+*.bak
+*.qws
+*.rpt
+*.summary
+*.done
+*.jdi
+*.pin
+*.smsg
+*.sof
+*.pof
+c5_pin_model_dump.txt
+
+# Simulator artifacts (ModelSim / Questa / Verilator)
+tb/work/
+tb/transcript
+*.wlf
+*.vcd
+
+# Python cache
+__pycache__/
+*.pyc

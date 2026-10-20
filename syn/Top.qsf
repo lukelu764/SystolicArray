@@ -351,4 +351,4 @@ set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -entity DE10_LITE_VGA_
 set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -entity DE10_LITE_VGA_Pattern -section_id Top
 set_global_assignment -name PARTITION_COLOR 16764057 -entity DE10_LITE_VGA_Pattern -section_id Top
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -entity DE10_LITE_VGA_Pattern -section_id Top
-set_global_assignment -name VERILOG_FILE Top.v
+set_global_assignment -name SYSTEMVERILOG_FILE ../rtl/Top.sv
