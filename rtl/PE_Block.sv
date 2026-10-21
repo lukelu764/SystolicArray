@@ -25,7 +25,7 @@ always_ff @(posedge clk or negedge rst_n) begin
         a_out <= '0;
         b_out <= '0;
         acc   <= '0;
-    end else begin
+    end else if (en) begin
         a_out <= a_in;
         b_out <= b_in;
         acc   <= acc + (a_in * b_in);
