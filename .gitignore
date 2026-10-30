@@ -19,6 +19,7 @@ c5_pin_model_dump.txt
 # Simulator artifacts (ModelSim / Questa / Verilator)
 tb/work/
 tb/transcript
+obj_dir/
 *.wlf
 *.vcd
 
