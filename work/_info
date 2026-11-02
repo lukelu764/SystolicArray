@@ -1,0 +1,133 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 dC:/Users/Lukel/Desktop/test/SystolicArray
+vPE_Block
+Z1 DXx6 sv_std 3 std 0 22 AD7iAPLo6nTIKk<N0eo=D3
+Z2 !s110 1793599154
+!i10b 1
+!s100 NaJT]igXG9d1_7<UQa3L]3
+IPKhELNTLBL5Kd0[Kk?Oc[1
+Z3 VDg1SIo80bB@j0V0VzS_@n1
+!s105 PE_Block_sv_unit
+S1
+R0
+Z4 w1793593511
+8rtl/PE_Block.sv
+Frtl/PE_Block.sv
+L0 1
+Z5 OV;L;10.5b;63
+r1
+!s85 0
+31
+Z6 !s108 1793599154.000000
+!s107 rtl/PE_Block.sv|
+!s90 -reportprogress|300|-sv|rtl/PE_Block.sv|
+!i113 1
+o-sv
+Z7 tCvgOpt 0
+n@p@e_@block
+vSystolic_Array
+R1
+R2
+!i10b 1
+!s100 QJE8oBCQj@K?AUI_I[KE`3
+Ie3NgBT80z6m=J`X1>hWEo0
+R3
+!s105 Systolic_Array_sv_unit
+S1
+R0
+R4
+8rtl/Systolic_Array.sv
+Frtl/Systolic_Array.sv
+L0 1
+R5
+r1
+!s85 0
+31
+R6
+!s107 rtl/Systolic_Array.sv|
+!s90 -reportprogress|300|-sv|rtl/Systolic_Array.sv|
+!i113 1
+o-sv
+R7
+n@systolic_@array
+vtb_top
+R1
+R2
+!i10b 1
+!s100 PCgz5_jGZB@YV9h:WbPPB3
+IDn:aWTX=VY1l=YfJ8_?im2
+R3
+!s105 tb_top_sv_unit
+S1
+R0
+w1793599134
+8tb/Tiling/tb_top.sv
+Ftb/Tiling/tb_top.sv
+L0 3
+R5
+r1
+!s85 0
+31
+R6
+!s107 tb/Tiling/tb_top.sv|
+!s90 -reportprogress|300|-sv|tb/Tiling/tb_top.sv|
+!i113 1
+o-sv
+R7
+vtiling_block
+R1
+R2
+!i10b 1
+!s100 ATRLA6EOR4dQSKzS7iL9=1
+IVP2kTnOdUNed2m?hX]3DE0
+R3
+!s105 tiling_sv_unit
+S1
+R0
+w1793597762
+8rtl/tiling.sv
+Frtl/tiling.sv
+L0 1
+R5
+r1
+!s85 0
+31
+R6
+!s107 rtl/tiling.sv|
+!s90 -reportprogress|300|-sv|rtl/tiling.sv|
+!i113 1
+o-sv
+R7
+vTop
+R1
+R2
+!i10b 1
+!s100 AoP5US=aiS^W5QI0I?_?W3
+IBcW;?Xn?7[1aQH8CM2cWA3
+R3
+!s105 Top_sv_unit
+S1
+R0
+w1793593583
+8rtl/Top.sv
+Frtl/Top.sv
+L0 1
+R5
+r1
+!s85 0
+31
+R6
+!s107 rtl/Top.sv|
+!s90 -reportprogress|300|-sv|rtl/Top.sv|
+!i113 1
+o-sv
+R7
+n@top
