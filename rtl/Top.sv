@@ -1,39 +1,32 @@
-module Top #(
-    parameter N = 8,
-    parameter MAX_DIM = 64,
-    parameter DATA_W = 8,
-    parameter ACC_W = 32
-) (
-    input logic clk,
-    input logic rst_n,
-    input logic wr_en,
-    input logic wr_sel,
-    input logic [$clog2(MAX_DIM)-1:0] wr_row,
-    input logic [$clog2(MAX_DIM)-1:0] wr_col,
-    input logic signed [DATA_W-1:0] wr_data,
-    input logic start,
-    input logic [$clog2(MAX_DIM+1)-1:0] dim,
-    output logic busy,
-    output logic done,
-    output logic signed [ACC_W-1:0] C_out [MAX_DIM][MAX_DIM]
+
+module Top (
+    input  logic       MAX10_CLK1_50,
+    input  logic       UART_RX,
+    input  logic       KEY0,
+    output logic [9:0] LEDR
 );
-    tiling_block #(
-        .N(N), 
-        .MAX_DIM(MAX_DIM), 
-        .DATA_W(DATA_W), 
-        .ACC_W(ACC_W)
-    ) u_tiling (
-        .clk(clk), 
-        .rst_n(rst_n), 
-        .wr_en(wr_en), 
-        .wr_sel(wr_sel),
-        .wr_row(wr_row), 
-        .wr_col(wr_col), 
-        .wr_data(wr_data),
-        .start(start), 
-        .dim(dim), .
-        busy(busy), 
-        .done(done), 
-        .C_out(C_out)
-    );
+
+logic [7:0] rx_data;
+logic       rx_valid;
+
+// UART Receiver
+uart_rx #(
+    .CLK_FREQ (50_000_000),
+    .BAUD_RATE(115200)
+) uart_inst (
+    .clk        (MAX10_CLK1_50),
+    .rst_n      (KEY0),
+    .rx         (UART_RX),
+    .data_out   (rx_data),
+    .data_valid (rx_valid)
+);
+
+// Display received byte on LEDs
+always_ff @(posedge MAX10_CLK1_50 or negedge KEY0) begin
+    if (!KEY0)
+        LEDR <= 10'b0;
+    else if (rx_valid)
+        LEDR <= {2'b00, rx_data};
+end
+
 endmodule
