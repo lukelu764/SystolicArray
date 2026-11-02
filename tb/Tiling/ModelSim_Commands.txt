@@ -1,0 +1,24 @@
+cd C:/Users/Lukel/Desktop/test/SystolicArray
+
+if {![file isdirectory work]} {vlib work}
+
+vlog -sv rtl/PE_Block.sv
+vlog -sv rtl/Systolic_Array.sv
+vlog -sv rtl/tiling.sv
+vlog -sv tb/Tiling/tb_top.sv
+
+vsim work.tb_top
+
+
+view wave
+
+add wave sim:/tb_top/dut/C_out
+add wave sim:/tb_top/dut/state
+add wave sim:/tb_top/dut/tile_row
+add wave sim:/tb_top/dut/tile_col
+add wave sim:/tb_top/dut/stream_cycle
+add wave sim:/tb_top/dut/a_row_in
+add wave sim:/tb_top/dut/b_col_in
+
+run -all
+wave zoom full

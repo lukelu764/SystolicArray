@@ -13,7 +13,13 @@ module tb_top;
     integer A[0:11][0:11], B[0:11][0:11], expected[0:11][0:11];
     integer errors=0, cycles=0;
 
-    Top #(.N(N),.MAX_DIM(MAX_DIM),.DATA_W(DATA_W),.ACC_W(ACC_W)) dut (
+    // Directly instantiate tiling_block instead of Top
+    tiling_block #(
+        .N(N),
+        .MAX_DIM(MAX_DIM),
+        .DATA_W(DATA_W),
+        .ACC_W(ACC_W)
+    ) dut (
         .clk(clk), .rst_n(rst_n), .wr_en(wr_en), .wr_sel(wr_sel),
         .wr_row(wr_row), .wr_col(wr_col), .wr_data(wr_data),
         .start(start), .dim(dim), .busy(busy), .done(done), .C_out(C_out)
