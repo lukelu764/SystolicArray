@@ -1,18 +1,14 @@
-# Systolic Array FPGA — Verification & Linting Makefile
-# Simulation/waveforms: Verilator (--binary --trace) + GTKWave
-# Quartus compile check: Verilator strict lint-only (IEEE 1800-2009)
-
-# ------------------------------------------------------------------ Tools
+# Tools
 VERILATOR := verilator
 GTKWAVE   := gtkwave
 
-# ------------------------------------------------------------- Directories
+#  Directories
 RTL_DIR   := rtl
 TB_DIR    := tb
 SYN_DIR   := syn
 OBJ_DIR   := obj_dir
 
-# ---------------------------------------------------------------- Sources
+# Sources
 RTL_SRCS  := $(wildcard $(RTL_DIR)/*.sv)
 
 # Auto-discover every testbench under tb/ (any depth):
@@ -32,7 +28,7 @@ SIM_DIR    = $(OBJ_DIR)/$(TB)
 SIM_BIN    = $(SIM_DIR)/V$(TB_TOP)
 WAVE       = $(TB_DIR)/$(TB).vcd
 
-# -------------------------------------------------------------- Flags
+# Flags
 # Simulation: --binary builds a runnable exe, --trace enables VCD dumping.
 SIM_FLAGS  := --binary --trace -Wall -Wno-UNUSEDSIGNAL -Wno-BLKSEQ \
               -Wno-INITIALDLY -Wno-fatal -I$(RTL_DIR)
@@ -42,7 +38,6 @@ TOP_RTL    ?= Systolic_Array
 QLINT_FLAGS := --lint-only -Wall -Wpedantic --language 1800-2009 \
                -Wno-UNUSEDSIGNAL -I$(RTL_DIR)
 
-# ============================================================================
 .PHONY: all help list check-tb compile sim wave lint-quartus check-qsf clean
 
 all: lint-quartus sim
@@ -62,7 +57,7 @@ help:
 	@echo " Select another:  make wave TB=tb_top"
 	@echo "======================================================================"
 
-# ---------------------------------------------------- List discovered TBs
+# List discovered TBs
 list:
 	@echo ">>> [DISCOVER] Testbenches found under $(TB_DIR)/:"
 	@for f in $(TB_FILES); do \
@@ -72,7 +67,7 @@ list:
 	done
 	@echo "   Run with: make sim TB=<name>   or   make wave TB=<name>"
 
-# ---------------------------------------------------- Validate TB selection
+# Validate TB selection
 check-tb:
 	@if [ -z "$(TB_SRC)" ]; then \
 		echo "  [ERROR] No testbench matches TB=$(TB)."; \
@@ -80,7 +75,7 @@ check-tb:
 		exit 1; \
 	fi
 
-# ------------------------------------------- Compile TB into a Verilator exe
+# Compile TB into a Verilator exe
 compile: check-tb
 	@echo ">>> [COMPILE] Building $(TB) (top=$(TB_TOP)) -> $(SIM_BIN)"
 	@mkdir -p $(SIM_DIR)
@@ -88,24 +83,24 @@ compile: check-tb
 		--top-module $(TB_TOP) --exe --main
 	@echo ">>> [PASS] Built $(SIM_BIN)"
 
-# ------------------------------------------- Run sim and dump per-TB VCD
+# Run sim and dump per-TB VCD
 sim: compile
 	@echo ">>> [SIM] Running $(TB_TOP)..."
 	./$(SIM_BIN) +WAVE=$(WAVE)
 	@echo ">>> [WAVE] VCD written to $(WAVE)"
 
-# ------------------------------------------- Open waveform in GTKWave
+# Open waveform in GTKWave
 wave: sim
 	@echo ">>> [GTKWAVE] Opening $(WAVE)..."
 	$(GTKWAVE) $(WAVE) >/dev/null 2>&1 &
 
-# ======================================================= Quartus compile proxy
+# Quartus compile proxy
 lint-quartus: check-qsf
 	@echo ">>> [QUARTUS-LINT] Checking RTL against IEEE 1800-2009 standard..."
 	$(VERILATOR) $(QLINT_FLAGS) $(RTL_SRCS) --top-module $(TOP_RTL)
 	@echo ">>> [PASS] Quartus-strict lint passed!"
 
-# Verify every file in rtl/ is registered inside syn/Top.qsf
+# every file in rtl/ is registered inside syn/Top.qsf
 check-qsf:
 	@echo ">>> [QSF-CHECK] Verifying all rtl/*.sv files are listed in $(SYN_DIR)/Top.qsf..."
 	@if [ -f $(SYN_DIR)/Top.qsf ]; then \
@@ -123,7 +118,7 @@ check-qsf:
 		echo "  [INFO] $(SYN_DIR)/Top.qsf not found; skipping QSF manifest check."; \
 	fi
 
-# ============================================================== Clean
+# Clean
 clean:
 	@echo ">>> [CLEAN] Removing $(OBJ_DIR)/ and .vcd files..."
 	rm -rf $(OBJ_DIR) $(TB_DIR)/*.vcd *.vcd
