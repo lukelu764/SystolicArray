@@ -14,8 +14,8 @@ module tb_systolic_array;
   // 50 MHz clock
   always #10 clk <= ~clk;
 
-  // Instantiate your Systolic_Array
-  Systolic_Array #(
+  // Instantiate your systolic_array
+  systolic_array #(
       .N     (N),
       .DATA_W(DATA_W),
       .ACC_W (ACC_W)

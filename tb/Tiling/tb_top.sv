@@ -13,8 +13,8 @@ module tb_top;
     integer A[0:11][0:11], B[0:11][0:11], expected[0:11][0:11];
     integer errors=0, cycles=0;
 
-    // Directly instantiate tiling_block instead of Top
-    tiling_block #(
+    // Directly instantiate tiling instead of Top
+    tiling #(
         .N(N),
         .MAX_DIM(MAX_DIM),
         .DATA_W(DATA_W),
@@ -26,7 +26,8 @@ module tb_top;
     );
 
     task automatic write_element(input bit select_b,
-                                  input integer r, c, value);
+                                  input logic [$clog2(MAX_DIM)-1:0] r, c,
+                                  input logic signed [DATA_W-1:0]   value);
         @(negedge clk);
         wr_en=1;
         wr_sel=select_b;
@@ -71,12 +72,12 @@ module tb_top;
         // Load Matrix A
         for (int i=0; i<12; i++)
             for (int j=0; j<12; j++)
-                write_element(0,i,j,A[i][j]);
+                write_element(0, $clog2(MAX_DIM)'(i), $clog2(MAX_DIM)'(j), DATA_W'(A[i][j]));
 
         // Load Matrix B
         for (int i=0; i<12; i++)
             for (int j=0; j<12; j++)
-                write_element(1,i,j,B[i][j]);
+                write_element(1, $clog2(MAX_DIM)'(i), $clog2(MAX_DIM)'(j), DATA_W'(B[i][j]));
 
         @(negedge clk);
         start=1;

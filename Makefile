@@ -30,7 +30,8 @@ WAVE       = $(TB_DIR)/$(TB).vcd
 
 # Flags
 # Simulation: --binary builds a runnable exe, --trace enables VCD dumping.
-SIM_FLAGS  := --binary --trace -Wall -Wno-UNUSEDSIGNAL -Wno-BLKSEQ \
+# --timescale gives every module a consistent time unit (silences TIMESCALEMOD).
+SIM_FLAGS  := --binary --trace --timescale 1ns/1ps -Wall -Wno-UNUSEDSIGNAL -Wno-BLKSEQ \
               -Wno-INITIALDLY -Wno-fatal -I$(RTL_DIR)
 
 # Quartus-strict lint-only proxy (IEEE 1800-2009, the standard Quartus Lite uses).
