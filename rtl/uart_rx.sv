@@ -49,20 +49,17 @@ module uart_rx #(
 
       case (state)
 
-
         IDLE: begin
           if (!rx_sync) begin  // if pulled low
-            counter <= CLKS_PER_BIT / 2 - 1;
+            counter <= 16'(CLKS_PER_BIT / 2 - 1);
             state   <= START;
           end
         end
 
-
-
         START: begin
           if (counter == 0) begin
             if (!rx_sync) begin
-              counter   <= CLKS_PER_BIT - 1;
+              counter   <= 16'(CLKS_PER_BIT - 1);
               bit_index <= 0;
               state     <= DATA;
             end else begin
@@ -71,19 +68,15 @@ module uart_rx #(
           end else counter <= counter - 1;
         end
 
-
-
         DATA: begin
           if (counter == 0) begin
             rx_data[bit_index] <= rx_sync;
-            counter            <= CLKS_PER_BIT - 1;
+            counter            <= 16'(CLKS_PER_BIT - 1);
 
             if (bit_index == 7) state <= STOP;
             else bit_index <= bit_index + 1;
           end else counter <= counter - 1;
         end
-
-
 
         STOP: begin
           if (counter == 0) begin

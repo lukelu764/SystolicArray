@@ -34,7 +34,7 @@ SIM_FLAGS  := --binary --trace -Wall -Wno-UNUSEDSIGNAL -Wno-BLKSEQ \
               -Wno-INITIALDLY -Wno-fatal -I$(RTL_DIR)
 
 # Quartus-strict lint-only proxy (IEEE 1800-2009, the standard Quartus Lite uses).
-TOP_RTL    ?= Systolic_Array
+TOP_RTL    ?= Top
 QLINT_FLAGS := --lint-only -Wall -Wpedantic --language 1800-2009 \
                -Wno-UNUSEDSIGNAL -I$(RTL_DIR)
 

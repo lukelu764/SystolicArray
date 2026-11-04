@@ -1,4 +1,4 @@
-module Systolic_Array #(
+module systolic_array #(
     parameter N      = 8,
     parameter DATA_W = 8,
     parameter ACC_W  = 32
@@ -19,7 +19,7 @@ module Systolic_Array #(
   generate
     for (i = 0; i < N; i++) begin : gen_pe_row
       for (j = 0; j < N; j++) begin : gen_pe_col
-        PE_Block #(
+        pe_block #(
             .DATA_W(DATA_W),
             .ACC_W (ACC_W)
         ) u_pe (

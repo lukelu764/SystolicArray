@@ -53,7 +53,7 @@ module tiling #(
   logic signed [DATA_W-1:0] b_col_in[N];
   logic signed [ ACC_W-1:0] c_matrix[N] [N];
 
-  Systolic_Array #(
+  systolic_array #(
       .N(N),
       .DATA_W(DATA_W),
       .ACC_W(ACC_W)
