@@ -23,6 +23,15 @@ obj_dir/
 *.wlf
 *.vcd
 
+# ModelSim / Questa compiled library & logs (repo-root, not just tb/)
+work/
+transcript
+vsim.wlf
+modelsim.ini
+*.qpg
+*.qtl
+*.qdb
+
 # Python cache
 __pycache__/
 *.pyc

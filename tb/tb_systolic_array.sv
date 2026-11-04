@@ -24,7 +24,10 @@ module tb_systolic_array;
   );
 
   initial begin
-    $dumpfile("tb/systolic_wave.vcd");
+    string wavefile;
+    if (!$value$plusargs("WAVE=%s", wavefile))
+      wavefile = "tb/systolic_wave.vcd";
+    $dumpfile(wavefile);
     $dumpvars(0, tb_systolic_array);
 
     // Initialize inputs to 0

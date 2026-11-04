@@ -37,6 +37,16 @@ module tb_top;
         wr_en=0;
     endtask
 
+    // Waveform dump. Filename overridable via +WAVE=<path> plusarg (set by Makefile);
+    // defaults to tb/tiling_wave.vcd otherwise.
+    initial begin
+        string wavefile;
+        if (!$value$plusargs("WAVE=%s", wavefile))
+            wavefile = "tb/tiling_wave.vcd";
+        $dumpfile(wavefile);
+        $dumpvars(0, tb_top);
+    end
+
     initial begin
         // Generate signed 12x12 matrices
         for (int i=0; i<12; i++) begin
