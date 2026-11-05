@@ -47,7 +47,7 @@ module uart_rx #(
     end else begin
       data_valid <= 0;
 
-      case (state)
+      unique case (state)
 
         IDLE: begin
           if (!rx_sync) begin  // if pulled low
