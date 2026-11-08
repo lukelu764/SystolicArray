@@ -26,6 +26,7 @@ set_global_assignment -name SYSTEMVERILOG_FILE ../rtl/pe_block.sv
 set_global_assignment -name SYSTEMVERILOG_FILE ../rtl/systolic_array.sv
 set_global_assignment -name SYSTEMVERILOG_FILE ../rtl/tiling.sv
 set_global_assignment -name SYSTEMVERILOG_FILE ../rtl/uart_matrix_loader.sv
+set_global_assignment -name SYSTEMVERILOG_FILE ../rtl/uart_matrix_sender.sv
 set_global_assignment -name SYSTEMVERILOG_FILE ../rtl/uart_rx.sv
 set_global_assignment -name SYSTEMVERILOG_FILE ../rtl/uart_tx.sv
 
