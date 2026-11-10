@@ -30,6 +30,32 @@ def comparison(a,b,fpga_output): #check if the output did it right
     real_answer = a @ b
     return np.array_equal(real_answer, fpga_output)
 
-uart_transmission(a)
+def uart_receiver():
+    # UART payload format:
+    #   byte 0: row count
+    #   byte 1: column count
+    #   then top to bottom left to right
+    # Wait indefinitely until the FPGA sends a packet.
+    while True:
+        header = ser.read(2)
+        if len(header) == 2:
+            rows, cols = header
+            break
 
+    payload_size = rows * cols
+    payload = bytearray()
+
+    while len(payload) < payload_size: #waits forever
+        chunk = ser.read(payload_size - len(payload))
+        if chunk:
+            payload.extend(chunk)
+
+    return np.frombuffer(payload, dtype=np.uint8).reshape((rows, cols)) #cool reshape function to turn 1D array to 2D
+
+
+uart_transmission(a)
 uart_transmission(b)
+
+out = uart_receiver()
+
+print(f"Comparison status {comparison(a,b,out)}. Output array is {out}")
